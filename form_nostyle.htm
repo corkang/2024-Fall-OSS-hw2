@@ -6,6 +6,7 @@
   <title>Document</title>
 </head>
 <body>
+  <!-- 사용된 form tag 종류 : text, email, select, checkbox, radio -->
   <div class="top-text">
     <img src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg" alt="bootstrap-logo" width="72" height="57">
     <h2>Checkout form</h2>
@@ -86,7 +87,8 @@
 
       <div>
         <label for="address2">Address 2 <span>(Optional)</span></label>
-        <input type="text" name="address2" id="address2" placeholder="Apartment or suite">
+        <textarea name="address2" id="address2" placeholder="Apartment or suite"></textarea>
+        <!-- <input type="" name="address2" id="address2" placeholder="Apartment or suite"> -->
       </div>
 
       <div>
@@ -110,7 +112,12 @@
         <input type="text" name="zip" id="zip" placeholder="" required>
       </div>
       
+      <div>
+        <label for="birth">Birth</label>
+        <input type="date" name="birth" id="birth">
+      </div>
       <hr>
+
 
       <div>
         <input type="checkbox" name="same-address" id="same-address">
