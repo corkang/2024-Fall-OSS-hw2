@@ -34,6 +34,52 @@
       flex-direction: row-reverse;
     }
 
+    .input-style1 {
+      width: 500px;
+      padding: 12px 50px;
+    }
+
+    #username {
+      border: 10px solid black;
+    }
+
+    #email {
+      border: none;
+      border-bottom: 10px dotted red;
+    }
+
+    #address, #address2 {
+      background-color: blue;
+      color: white;
+    }
+
+    #address:focus {
+      background-color: brown;
+    }
+
+    #address2 {
+      resize: none;
+    }
+
+    #zip {
+      transition: width 2s ease-in-out;
+    }
+
+    #zip:focus {
+      width: 80%;
+
+    }
+
+    button[type="submit"] {
+      background-color: #04AA6D;
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-decoration: none;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    
   </style>
 
 </head>
@@ -94,11 +140,11 @@
         <form>
           <div>
             <label for="firstName">First name</label>
-            <input type="text" name="firstName" id="firstName" placeholder="" value="" required>
+            <input class="input-style1" type="text" name="firstName" id="firstName" placeholder="" value="" required>
           </div>
           <div>
             <label for="lastName">Last name</label>
-            <input type="text" name="lastName" id="lastName" placeholder="" value="" required>
+            <input class="input-style1" type="text" name="lastName" id="lastName" placeholder="" value="" required>
           </div>
 
           <div>
