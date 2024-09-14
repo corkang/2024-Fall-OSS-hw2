@@ -4,13 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+
+  <style>
+    input {
+      width: 150px;
+    }
+
+    button {
+      color: white;
+      width: 50px;
+      border: 0;
+      height: 25px;
+    }
+
+    #btn-1 {
+      background-color: blue;
+    }
+
+    #btn-2 {
+      background-color: green;
+    }
+  </style>
 </head>
 <body>
   <h1>Dynamic web page</h1>
   <form onsubmit="return add(event)">
     <input type="text" name="userInput" id="userInput">
-    <button type="submit">추가</button>
-    <button type="button" onclick="return del()">삭제</button>
+    <button id="btn-1" type="submit">추가</button>
+    <button id="btn-2" type="button" onclick="return del()">삭제</button>
   </form>
 
   <ul id="addHere">
@@ -22,10 +43,15 @@
     function add() {
       const inputText = document.getElementById('userInput').value;
       document.getElementById('userInput').value = "";
-      const li = document.createElement("li");
-      li.textContent = inputText;
 
-      document.getElementById("addHere").appendChild(li);
+      if(inputText == "") {
+        alert("추가할 내용을 입력하세요");
+      } else {
+        const li = document.createElement("li");
+        li.textContent = inputText;
+        
+        document.getElementById("addHere").appendChild(li);
+      }
       event.preventDefault();
     }
 
