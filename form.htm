@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Dynamic web page</h1>
+  <form onsubmit="return add(event)">
+    <input type="text" name="userInput" id="userInput">
+    <button type="submit">추가</button>
+    <button type="button" onclick="return del()">삭제</button>
+  </form>
+
+  <ul id="addHere">
+  </ul>
+
+  <script>
+    var inputNum = 0;
+    
+    function add() {
+      const inputText = document.getElementById('userInput').value;
+      document.getElementById('userInput').value = "";
+      const li = document.createElement("li");
+      li.textContent = inputText;
+
+      document.getElementById("addHere").appendChild(li);
+      event.preventDefault();
+    }
+
+    function del() {
+      const ul = document.getElementById("addHere");
+      ul.remove();
+      location.reload();
+    }
+  </script>
+</body>
+</html>
