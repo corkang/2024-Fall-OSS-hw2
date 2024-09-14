@@ -148,6 +148,22 @@
       height: 30px;
     }
 
+    #promocode {
+      width: 200px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .btn-rd {
+      width: 100px;
+      height: 34px;
+      color: white;
+      background-color: grey;
+      border: 1px grey solid;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
     .warn {
       visibility: hidden;
     }
@@ -202,8 +218,7 @@
           </li>
         </ul>
         <form>
-          <input type="text" placeholder="Promo code" name="promocode" id="promocode" name="promocode">
-          <button type="submit" class="btn btn-secondary">Redeem</button>
+          <input type="text" placeholder="Promo code" name="promocode" id="promocode" name="promocode"><button type="submit" class="btn-rd">Redeem</button>
         </form>
       </div>
 
@@ -308,7 +323,7 @@
               </div>
             </div>
             <div>
-              <input id="paypal" name="paypal" type="radio" required>
+              <input id="paypal" name="paymentMethod" type="radio" required>
               <label for="paypal">PayPal</label>
             </div>
 
