@@ -223,18 +223,18 @@
             <h4>Billing address</h4>
 
             <div id="address-div-1">
-              <label for="firstName">First name</label>
+              <label for="firstName">First name (required) </label>
               <input class="input-style1" type="text" name="firstName" id="firstName" value="" required>
               <p id="firstname-warning" class="hide-warning-text">Valid first name is required</p>
             </div>
             <div id="address-div-2">
-              <label for="lastName">Last name</label>
+              <label for="lastName">Last name (required) </label>
               <input class="input-style1" type="text" name="lastName" id="lastName" placeholder="" value="" required>
               <p id="lastname-warning" class="hide-warning-text">Valid last name is required</p>
             </div>
 
             <div>
-              <label for="username">Username</label>
+              <label for="username">Username (required) </label>
 
               <!-- <span>@</span> -->
               <input type="text" name="username" id="username" value="" placeholder="Username">
@@ -382,6 +382,7 @@
     function validateForm(event) {
       let isSubmitted = confirm("제출하시겠습니까?");
       let needWarning = false;
+      event.preventDefault(event);
 
       if(isSubmitted) {
         if(document.getElementById('firstName').value == "") {
@@ -412,7 +413,6 @@
         }
 
         if(needWarning) {
-          event.preventDefault(event);
           alert("필수 항목을 모두 입력해주세요");
         }
       }
