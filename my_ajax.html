@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>수업 목록</h1>
+  <button id="btnClasses" onclick="getData()">수업 데이터 가져오기</button>
+
+  <h3>수업 데이터 추가/수정</h3>
+  ID : <input type="text" id="dataId" /> <br>
+  class name : <input type="text" id="cname" /> <br>
+  credit : <input type="number" id="credit" /> <br>
+  professor : <input type="text" id="prof" /> <br>
+  class code : <input type="text" id="code" /> <br>
+  grading type : <input type="text" id="type" /> <br>
+  <button id="btnAdd" onclick="postData()">추가</button>
+  <button id="btnUpdate" onclick="updateData()">수정</button>
+  <button id="btnDelete" onclick="deleteData()">삭제</button>
+
+  <div id="contents">
+  </div>
+
+  <script>
+
+
+    function getData() {
+      let contents = document.getElementById("contents");
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "http://localhost:3001/classes");
+      xhr.setRequestHeader("content-type", "application/json");
+      xhr.send();
+
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          const res = JSON.parse(xhr.response);
+          contents.innerHTML = makeList(res);
+        } else {
+          console.log(xhr.status, xhr.statusText);
+        }
+      }
+    }
+
+    function makeList(data) {
+      let str = "<ol>";
+      for (key in data) {
+        //console.log("Name :" + data[key].name + " , age :" +data[key].age);
+        str += "<li> [" + data[key].code + "] " + data[key].cname + " (" + data[key].prof + ")" + " - " + data[key].type + "</li>";
+      }
+      str += "</ol>";
+      return str;
+    }
+
+    function postData() {
+      let contents = document.getElementById("contents");
+      let dataId = document.getElementById("dataId");
+      let cname = document.getElementById("cname");
+      let credit = document.getElementById("credit");
+      let prof = document.getElementById("prof");
+      let code = document.getElementById("code");
+      let type = document.getElementById("type");
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "http://localhost:3001/classes");
+      xhr.setRequestHeader("content-type", "application/json;charset=UTF-8");
+      
+      const data = {
+        id: dataId.value, 
+        cname: cname.value,
+        credit: credit.value,
+        prof: prof.value,
+        code: code.value,
+        type: type.value 
+      };
+      xhr.send(JSON.stringify(data));
+      xhr.onload = () => {
+        if (xhr.status === 201) {
+          dataId.value="";
+          cname.value="";
+          credit.value="";
+          prof.value="";
+          code.value="";
+          type.value="";
+          const res = JSON.parse(xhr.response);
+          getData();
+        } else {
+          console.log(xhr.status, xhr.statusText);
+        }
+      }
+    }
+
+    function updateData() {
+      let dataId = document.getElementById("dataId").value;
+      let cname = document.getElementById("cname").value;
+      let credit = document.getElementById("credit").value;
+      let prof = document.getElementById("prof").value;
+      let code = document.getElementById("code").value;
+      let type = document.getElementById("type").value;
+
+      if (!dataId || !cname || !credit || !prof || !code || !type) {
+        alert("모든 값을 입력하세요!");
+        return;
+      }
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("PUT", `http://localhost:3001/classes/${dataId}`);
+      xhr.setRequestHeader("content-type", "application/json;charset=UTF-8");
+      let data = {
+        id: dataId, 
+        cname: cname,
+        credit: credit,
+        prof: prof,
+        code: code,
+        type: type 
+      };
+
+      xhr.send(JSON.stringify(data));
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          alert("수정 성공");
+          const res = JSON.parse(xhr.response);
+          console.log(res);
+          getData();
+        } else {
+          console.log(xhr.status, xhr.statusText);
+        }
+      }
+    }
+
+    function deleteData() {
+      const dataId = document.getElementById("dataId").value;
+
+      if (!dataId) {
+        alert("ID가 올바르지 않습니다");
+        return;
+      }
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("DELETE", `http://localhost:3001/classes/${dataId}`);
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.send();
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          alert("삭제 성공!");
+          getData();
+        } else {
+          console.log("error:", xhr.status, xhr.statusText);
+        }
+      };
+    }
+  </script>
+</body>
+</html>
+
